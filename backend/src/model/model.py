@@ -25,5 +25,3 @@ tag = Table('tag', metadata,
             Column('film_id', BigInteger),
             Column('content', String(20)),
             Column('date_create', DateTime), Column('date_update', DateTime))
-
-hello = 'hello world'
