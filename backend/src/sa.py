@@ -25,9 +25,7 @@ async def prepare_db(app, loop):
         'host': database_host,
         'password': database_password
     }
-    app.pool = {
-        'sqlalchemy': await create_engine(**db_config)
-    }
+    app.pool = {'sqlalchemy': await create_engine(**db_config)}
 
 
 @app.listener('before_server_stop')
@@ -40,10 +38,7 @@ async def handler(request):
     async with app.pool['sqlalchemy'].acquire() as conn:
         result = []
         async for row in conn.execute(user.select()):
-            result.append({
-                'name': row.name,
-                'password': row.password
-            })
+            result.append({'name': row.name, 'password': row.password})
         return json({'user': result})
 
 
@@ -54,19 +49,17 @@ async def remove_user(request, name):
         trans = await conn.begin()
         await conn.execute(user.insert().values(name="xxha", password="zzzz"))
         await conn.execute(user.insert().values(name="ddd", password="llll"))
-        await conn.execute(user.update().where(user.c.name == "wang").
-                           values(password="0000"))
+        await conn.execute(
+            user.update().where(user.c.name == "wang").values(password="0000"))
         await trans.commit()
 
         result = []
         async for row in conn.execute(user.select()):
-            result.append({
-                'name': row.name,
-                'password': row.password
-            })
+            result.append({'name': row.name, 'password': row.password})
 
         print('current result:', jsonToStr.dumps(result))
         return json({'message': 'ok'})
 
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8888,  workers=4)
+    app.run(host='0.0.0.0', port=8888, workers=4)
