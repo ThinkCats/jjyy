@@ -16,7 +16,7 @@ class Layouts extends Component {
     render() {
         return (
           <div style={{maxWidth: '1080px', margin: '0 auto'}}>
-            <div><Header/></div>
+            <div className="head"><Header/></div>
             <div>
               <div className="main">{this.props.children}</div>
               <div className="sider">sider</div>
