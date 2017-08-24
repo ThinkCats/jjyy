@@ -16,6 +16,8 @@
     "morgan": "~1.8.1",
     "mysql": "^2.14.1",
     "node-schedule": "^1.2.4",
+    "node-telegram-bot-api": "^0.28.0",
+    "selenium-webdriver": "^3.5.0",
     "serve-favicon": "~2.4.2"
   },
   "devDependencies": {
